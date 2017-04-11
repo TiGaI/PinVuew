@@ -42,7 +42,6 @@ router.post('/facebookAuth', function(req, res) {
 
 // TODO: Linkedin
 router.post('/googleAuth', function(req, res) {
-
   var profile = req.body.result
   User.findOne({email: profile.email})
   .populate('activities', 'activityTitle activityLocation')
@@ -51,15 +50,17 @@ router.post('/googleAuth', function(req, res) {
               return {err, user}
           }
           if (!user) {
-              var Name = profile.name.toString().split(' ');
-              var firstName = Name[0];
-              var lastName = Name[Name.length - 1];
+              var firstName = profile.givenName;
+              var lastName = profile.familyName;
               var newUser = new User({
                   firstName: firstName,
                   lastName: lastName,
                   email: profile.email,
-                  profileImg: profile.photo ? profile.picture.photo : 'http://shurl.esy.es/y'
+                  profileImg: profile.photo ? profile.photo : 'http://shurl.esy.es/y'
               });
+
+              console.log(newUser)
+
               newUser.save(function(err) {
                   if (err) console.log(err);
                   res.send(user)

@@ -30,7 +30,6 @@ class PinVuew extends Component {
         webClientId: '370532562699-bkuhvhkriv8bilu16vbibsi7ah1950jl.apps.googleusercontent.com',
         offlineAccess: false
       });
-
       const user = await GoogleSignin.currentUserAsync();
     }
     catch(err) {

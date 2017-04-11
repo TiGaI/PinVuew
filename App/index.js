@@ -15,8 +15,6 @@ function index() {
       );
     }
   }
-
-
   return Root;
 }
 

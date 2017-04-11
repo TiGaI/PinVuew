@@ -32,10 +32,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.googleusercontent.apps.370532562699-bkuhvhkriv8bilu16vbibsi7ah1950jl</string>
+			<string>com.googleusercontent.apps.370532562699-jdrkinfjg1uetd8b9obm2v9k2nghn42m</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.370532562699-bkuhvhkriv8bilu16vbibsi7ah1950jl</string>
+				<string>com.googleusercontent.apps.370532562699-jdrkinfjg1uetd8b9obm2v9k2nghn42m</string>
 			</array>
 		</dict>
 		<dict>
@@ -46,6 +46,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>org.reactjs.native.example.PinVuew</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>370532562699-jdrkinfjg1uetd8b9obm2v9k2nghn42m.apps.googleusercontent.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>370532562699-jdrkinfjg1uetd8b9obm2v9k2nghn42m.apps.googleusercontent.com</string>
 			</array>
 		</dict>
 	</array>
