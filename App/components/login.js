@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { Button, SocialIcon } from 'react-native-elements'
 
+
 class Login extends Component {
   render() {
     return (
@@ -28,6 +29,7 @@ class Login extends Component {
           <SocialIcon
             light
             type='google'
+            onPress={this.props.google}
           />
 
         </View>

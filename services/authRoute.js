@@ -10,7 +10,7 @@ router.post('/facebookAuth', function(req, res) {
 
     var profile = req.body.result
     User.findOne({email: profile.email})
-    .populate('activities', 'activityTitle activityImages timeStart timeEnd')
+    .populate('activities', 'activityTitle activityLocation')
     .exec(function(err, user) {
             if (err) {
                 return {err, user}
@@ -41,8 +41,35 @@ router.post('/facebookAuth', function(req, res) {
 });
 
 // TODO: Linkedin
-router.post('/linkedinAuth', function(req, res) {
-    // req.body.id
+router.post('/googleAuth', function(req, res) {
+
+  var profile = req.body.result
+  User.findOne({email: profile.email})
+  .populate('activities', 'activityTitle activityLocation')
+  .exec(function(err, user) {
+          if (err) {
+              return {err, user}
+          }
+          if (!user) {
+              var Name = profile.name.toString().split(' ');
+              var firstName = Name[0];
+              var lastName = Name[Name.length - 1];
+              var newUser = new User({
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: profile.email,
+                  profileImg: profile.photo ? profile.picture.photo : 'http://shurl.esy.es/y'
+              });
+              newUser.save(function(err) {
+                  if (err) console.log(err);
+                  res.send(user)
+                  return {err, user}
+              });
+          } else {
+            res.send(user)
+            return user
+          }
+      });
 
 });
 
