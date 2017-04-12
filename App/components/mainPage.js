@@ -130,16 +130,15 @@ class MainPage extends Component {
          longitudeDelta: this.state.currentPosition.longitudeDelta,
          }}
          title='Title'
-
       />
-      <View style={{alignItems: 'center'}}>
-      <TouchableOpacity onPress={this.category.bind(this)}>
-      <Text
-      style={{borderColor: 'white', borderWidth: 1,borderColor: 'transparent', marginTop: 150, backgroundColor: '#00A8BE', width: 275, padding: 15, color: 'white', textAlign: 'center', fontSize: 20}}
-      placeholder= 'Select a category'
-      >Find things to do... {this.state.lastPosition}</Text>
-      </TouchableOpacity>
-      </View>
+
+          <TouchableOpacity style={{ flex: 1, marginTop: 50, justifyContent: 'center'}} onPress={this.category.bind(this)}>
+              <Text
+              style={{borderColor: 'white', borderWidth: 1,borderColor: 'transparent', backgroundColor: '#00A8BE', width: 275, padding: 15, color: 'white', textAlign: 'center', fontSize: 20}}
+              placeholder= 'Select a category'
+              >Find things to do... {this.state.lastPosition}</Text>
+          </TouchableOpacity>
+
       {this.props.profile.userObject !== null ? (<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
         <Text style={{fontSize: 12, backgroundColor: 'transparent', fontWeight: '500' }}>Add Location</Text>
         <View style={{flex: 0, marginBottom: 60, backgroundColor: '#00A8BE', width: 50, height: 50,
