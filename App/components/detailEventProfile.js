@@ -40,21 +40,6 @@ class DetailEvent extends Component{
       justifyContent: 'center'
     }
   }
-  joinActivity() {
-
-      // var copy = Object.assign({}, value);
-      // copy["activityCreator"] = this.props.profile.id
-      // console.log("this is copy: ", copy)
-      //  fetch("http://localhost:8080/joinActivity", {
-      //    method: 'POST',
-      //    headers: {
-      //      "Content-Type": "application/json"
-      //    },
-      //    body: JSON.stringify({
-      //      activity: copy
-      //    })
-      //  })
-  }
   addFriend(){
     const {userObject} = this.props.profile;
     const {activityCreator, actions} =this.props;
