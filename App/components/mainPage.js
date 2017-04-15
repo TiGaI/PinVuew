@@ -4,13 +4,14 @@ import { AppRegistry, ScrollView, StyleSheet, Text, View,
 import { Item, Input, Tab, Tabs,Spinner, List, ListItem, Left, Body } from 'native-base';
 import Swiper from 'react-native-swiper';
 import randomcolor from 'randomcolor';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/initialAction';
 import * as loginAction from '../actions/loginAction';
 import MapView from 'react-native-maps';
+
+import { Button, Icon } from 'react-native-elements'
 
 //Import navigation components
 import CreatePin from './createPin';
@@ -110,7 +111,7 @@ class MainPage extends Component {
     // console.log('LAT currentPosition2', this.state.currentPosition.latitude )
     // console.log('LONG currentPosition2', this.state.currentPosition.longitude )
     return(
-      <View style={{flex: 1}}>
+      <View style={{flex: 2}}>
       {this.state.currentPosition.latitude !== 1 && this.state.currentPosition.longitude !== 1 ? (
 
       <MapView
@@ -132,22 +133,28 @@ class MainPage extends Component {
          title='Title'
       />
 
-          <TouchableOpacity style={{ flex: 1, marginTop: 50, justifyContent: 'center'}} onPress={this.category.bind(this)}>
+      <View style={{flex: 0,  justifyContent: 'center'}}>
+        <TouchableOpacity onPress={this.category.bind(this)}>
               <Text
               style={{borderColor: 'white', borderWidth: 1,borderColor: 'transparent', backgroundColor: '#00A8BE', width: 275, padding: 15, color: 'white', textAlign: 'center', fontSize: 20}}
               placeholder= 'Select a category'
               >Find things to do... {this.state.lastPosition}</Text>
-          </TouchableOpacity>
+        </TouchableOpacity >
 
-      {this.props.profile.userObject !== null ? (<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-        <Text style={{fontSize: 12, backgroundColor: 'transparent', fontWeight: '500' }}>Add Location</Text>
-        <View style={{flex: 0, marginBottom: 60, backgroundColor: '#00A8BE', width: 50, height: 50,
-        alignItems: 'center', justifyContent: 'center', borderRadius: 25}}>
-          <TouchableOpacity onPress={this.createPin.bind(this)}>
-            <Icon style={{fontSize: 35, color: 'white'}} name='md-add'/>
-          </TouchableOpacity>
-        </View>
+      {this.props.profile.userObject !== null ? (<View style={{flex: 0, alignItems: 'center', justifyContent: 'center'}}>
+
+      <Text style={{fontSize: 12, backgroundColor: 'transparent', fontWeight: '500' }}>Add Location</Text>
+
+
+          <Icon
+            raised
+            name='touch-app'
+            color='#FD4F0D'
+            onPress={() => this.createPin()} />
+
       </View>) : null }
+
+      </View>
 
       </MapView>
     ) : null}

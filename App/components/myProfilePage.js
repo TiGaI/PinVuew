@@ -60,7 +60,6 @@ class ProfilePage extends Component{
       const dataSource = ds.cloneWithRows(favs);
 
       const profileImg = userObject.profileImg;
-      console.log('this is looking for the profile image',profileImg)
     }
 
 
@@ -112,6 +111,9 @@ class ProfilePage extends Component{
                       </View>
                       </View>
                       </View>
+
+
+
                       <View style={{flex: 1, backgroundColor: '#00A8BE', padding: 10, marginTop: -10}}>
                       <ListView
                           dataSource={dataSource}
@@ -137,25 +139,24 @@ class ProfilePage extends Component{
 
   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00A8BE'}}>
 
-<Text style={{fontSize: 20, color: 'white'}}>Login to view profile</Text>
-    <View style={{  flex: 0,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 20,
-   flexDirection: 'row'}}>
+      <Text style={{fontSize: 20, color: 'white'}}>Login to view profile</Text>
+          <View style={{  flex: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 20,
+         flexDirection: 'row'}}>
 
-      <SocialIcon
-        light
-        type='facebook'
-        onPress={this.props.facebook}
-      />
+            <SocialIcon
+              light
+              type='facebook'
+              onPress={this.props.facebook}
+            />
 
-      <SocialIcon
-        light
-        type='google'
-      />
-
-    </View>
+            <SocialIcon
+              light
+              type='google'
+            />
+        </View>
   </View>
 
 )}
@@ -190,4 +191,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
-

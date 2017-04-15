@@ -1,13 +1,13 @@
-import tabs from './tabReducer';
 import {populatedActivities} from './initialReducer';
 import {loginReducer, profileReducer} from './loginReducer';
+import {settingGoal} from './goalandnotificationReducer'
 import { combineReducers } from 'redux-immutable';
 
 const applicationReducers = {
 	login: loginReducer,
 	profile: profileReducer,
-	tabs,
-	activityPageState: populatedActivities
+	activityPageState: populatedActivities,
+	goal: settingGoal
 };
 
 export default function createReducer() {

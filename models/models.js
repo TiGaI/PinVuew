@@ -28,13 +28,10 @@ var userSchema = new mongoose.Schema({
   profileImg: {
     type: String
   },
-  interestsTag: [],
   admin: {
     type: Boolean,
     default: false
-  },
-  joinActivities: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activity'}],
-  createdActivities: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activity'}],
+  }
 },
 { timestamps: true }
 );
@@ -75,10 +72,31 @@ var activitySchema = new mongoose.Schema({
   activityStartTime: {
     type: Date,
     required: true
-  },
-  checkInUser: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+  }
 },
 { timestamps: true }
+);
+
+var goalsSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  activityCategory: {
+    type: String,
+    required: true
+  },
+  activityGoal: {
+    type: Number,
+    required: true
+  },
+  goalTimeFrame: {
+    type: Number,
+    required: true
+  }
+  },
+  { timestamps: true }
 );
 
 var notificationsSchema = new mongoose.Schema({
@@ -104,9 +122,11 @@ var notificationsSchema = new mongoose.Schema({
 var User = mongoose.model("User", userSchema);
 var Activity = mongoose.model("Activity", activitySchema);
 var Usernotification = mongoose.model("Usernotification", notificationsSchema);
+var Goal = mongoose.model("Goal", goalsSchema);
 
 module.exports = {
   User: User,
   Activity: Activity,
-  Usernotification: Usernotification
+  Usernotification: Usernotification,
+  Goal: Goal
 };
