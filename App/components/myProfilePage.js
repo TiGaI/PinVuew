@@ -62,7 +62,6 @@ class ProfilePage extends Component{
       const profileImg = userObject.profileImg;
     }
 
-
     return (
         <View style={{flex: 1}}>
         { userObject !== null ? (  <Swiper
@@ -75,7 +74,6 @@ class ProfilePage extends Component{
               loop={false}
               showsPagination={false}
               index={1}>
-
               <View style={this.viewStyle()}>
                 <Container>
                   <Content>
