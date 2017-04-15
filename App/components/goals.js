@@ -97,8 +97,6 @@ class Goals extends Component{
                 name='mode-edit'
                 onPress={this.editGoal.bind(this, x)}
                 />
-
-
                   <Radio selected={true} />
               </View>
 

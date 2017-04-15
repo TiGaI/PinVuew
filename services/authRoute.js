@@ -40,7 +40,6 @@ router.post('/facebookAuth', function(req, res) {
         });
 });
 
-// TODO: Linkedin
 router.post('/googleAuth', function(req, res) {
   var profile = req.body.result
   User.findOne({email: profile.email})
@@ -74,29 +73,16 @@ router.post('/googleAuth', function(req, res) {
 
 });
 
-// TODO: return Current user
-router.get('/getCurrentUser', function(req, res) {
-    User.findOne({_id: req.body.userID}, function(err, user) {
-            if (err) {
-                return {err, user}
-            }
-            if (user) {
-                return user
-            } else {
-              console.log("cannot find user");
-              return null
-            }
-        });
-});
-
 // TODO: Edit an user
 router.post('/editUser', function(req, res) {
-    // req.body.id
-    User.findOneAndUpdate({_id: req.body.id}, req.body.data, function(err, doc){
+    User.findOneAndUpdate({_id: req.body.userID}, req.body.userObject, function(err, user){
     if (err) return res.send(500, { error: err });
-    return res.send("succesfully saved");
-    });
 
+    res.send(user);
+
+    return user
+
+    });
 });
 
 module.exports = router;

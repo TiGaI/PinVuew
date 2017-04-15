@@ -94,6 +94,10 @@ var goalsSchema = new mongoose.Schema({
   goalTimeFrame: {
     type: Number,
     required: true
+  },
+  currentProgress: {
+    type: Number,
+    default: 0
   }
   },
   { timestamps: true }

@@ -7,43 +7,6 @@ const User  = require('../models/models').User;
 const Activity= require('../models/models').Activity;
 const userNotification= require('../models/models').userNotification;
 
-
-function updatedStatusOnMap() {
-      Action.find({$and: [
-            {'createdAt': {'$lt': new Date(Date.now() - 3*60*60*1000)}}
-          ]}).exec(function(err, actions){
-
-              if(err){
-                console.log(err);
-                res.send(err);
-              }
-
-              if(actions){
-
-                  //
-                  // Activity.findById().exec(function(err, activity){
-                  //
-                  //     activity.checkInUser = actions.length
-                  //
-                  //     activity.save(function(err){
-                  //       if(err){
-                  //         console.log(err);
-                  //         res.send(err);
-                  //       }
-                  //     })
-                  //
-                  // })
-
-              }else{
-                console.log('no actions for this activity ID')
-              }
-
-        })
-
-}
-// updatedStatusOnMap(); //run function once on startup
-// setInterval(updatedStatusOnMap, 5 * 60 * 1000)
-
 // dlon = lon2 - lon1
 // dlat = lat2 - lat1
 // a = (sin(dlat/2))^2 + cos(lat1) * cos(lat2) * (sin(dlon/2))^2

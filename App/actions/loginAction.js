@@ -181,6 +181,32 @@ export function login() {
     };
 }
 
+export function editProfile(userID, userObject) {
+    return dispatch => {
+        dispatch(attempt());
+
+          fetch('http://localhost:8080/editUser', {
+              method: 'POST',
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                userID: userID,
+                userObject: userObject
+              })
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                var userObject = Object.assign({}, responseJson);
+                dispatch(addUser(userObject));
+            })
+            .catch((err) => {
+              console.log('error: ', err)
+            });
+
+    };
+}
+
 export function skip() {
     return dispatch => {
         dispatch(attempt());
