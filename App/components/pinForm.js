@@ -11,18 +11,20 @@ import { AppRegistry, ScrollView, StyleSheet,
   import * as loginAction from '../actions/loginAction';
   import Icon from 'react-native-vector-icons/Ionicons';
 
+
+  //Import navigation components
+  import MainPage from './mainPage';
+
   var t = require('tcomb-form-native');
   var Form = t.form.Form;
 
   const nameofthecategory = t.enums.of([
-    'Baseball',
-    'Basketball',
-    'Beach Volleyball',
-    'Hiking',
-    'Running',
-    'Soccer',
-    'Tennis'
-
+    'Entertainment',
+    'Exercise',
+    'Food',
+    'Hobbies',
+    'Relaxing',
+    'Studying'
   ], 'nameofthecategory');
 
   const numberofhours = t.enums.of([
@@ -31,7 +33,13 @@ import { AppRegistry, ScrollView, StyleSheet,
     '3',
     '4',
     '5',
-    '6'
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12'
 
   ], 'numberofhours');
 
@@ -47,7 +55,6 @@ import { AppRegistry, ScrollView, StyleSheet,
     activityTitle: t.String,
     activityDescription: t.String,
     activityCategory: nameofthecategory,
-    activityCapacity: t.Number,
     activityStartTime: t.Date,
     activityDuration: numberofhours
   });
@@ -197,6 +204,9 @@ import { AppRegistry, ScrollView, StyleSheet,
 
 
         this.props.actions.createActivity(activityObject)
+        this.props.navigator.replace({
+          component: MainPage
+        })
 
         }
         //   fetch('http://localhost:8080/postToS3', {
@@ -231,7 +241,7 @@ import { AppRegistry, ScrollView, StyleSheet,
         const { profile } = this.props;
         return(
           <View style={styles.container}>
-          <Text style={{fontSize: 25, fontWeight: '700', color: '#323232', margin: 20, textAlign: 'center'}}>Pin a location </Text>
+          <Text style={{fontSize: 25, fontWeight: '700', color: '#323232', margin: 20, textAlign: 'center'}}>Pin A Task </Text>
           <ScrollView keyboardShouldPersistTaps="always" style={{paddingLeft:10,paddingRight:10, height:500}}>
           <Form
           ref="form"

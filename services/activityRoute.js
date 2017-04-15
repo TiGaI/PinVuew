@@ -1,6 +1,8 @@
 "use strict";
 var express = require('express');
 var router = express.Router();
+var _ = require('lodash');
+var moment = require('moment');
 
 //model
 const User  = require('../models/models').User;
@@ -98,6 +100,86 @@ router.post('/getPingsAroundMe', function(req, res){
           return activities;
     });
 });
+
+router.post('/editActivity', function(req,res){
+  var activity = req.body.activity;
+  var activityCreatorId = req.body.activityCreatorId;
+  var activityId = req.body.activityID;
+  Activity.findByIdAndUpdate(activityId, activity, {new: true}, function(err, newActivity){
+    if(err){
+      console.log(err);
+      res.send(err);
+      return err
+    } else {
+      res.send(newActivity);
+      console.log(newActivity);
+      return newActivity;
+    }
+
+  })
+});
+
+router.post('/deleteActivity', function(req,res){
+  console.log('INSIDE DELETE ACTIVITY SERVER')
+  var activityCreatorId = req.body.activityCreatorId;
+  var activityId = req.body.activityID;
+  Activity.findByIdAndRemove(activityId, function(err, newActivity){
+    if(err){
+      console.log(err);
+      res.send(err);
+      return err
+    } else {
+      res.send(newActivity);
+      console.log('Actiity Deleted', newActivity);
+      return newActivity;
+    }
+
+  })
+});
+
+router.post('/getAllUserActivities', function(req,res){
+  console.log('INSIDE GET ALL ACTIVITIES SERVER')
+  var userId = req.body.userId;
+  Activity.find({activityCreator: [userId]})
+  .sort({activityCategory: +1})
+  .sort({activityStartTime: +1})
+  .exec(function(err, allActivities){
+    if(err){
+      console.log(err);
+      res.send(err);
+      return err;
+    } else {
+      var x = null;
+      var y = null;
+      var z = null;
+      var index = 0;
+      var sum =[];
+      x = _.groupBy(allActivities, function (date) {
+        return moment(date.activityStartTime).format("DD/MM/YYYY");
+      });
+
+
+
+      for (var key in x) {
+          // console.log('TRYING TO FIND VALUES',x[key]);
+
+          y = _.groupBy(x[key], 'activityCategory');
+          console.log("YyYYYYYYYY", y)
+          // console.log("KEEEEEEEEYYYYYYYY", [key])
+          y['date'] = key
+          sum[index] = y
+          index++;
+      }
+
+      // console.log('SUMMMMMMM', sum)
+
+      res.send(sum);
+
+      return sum;
+    }
+  })
+})
+
 
 router.post('/createActivity', function(req, res){
   var activity = req.body.activity;
