@@ -85,6 +85,10 @@ class Goals extends Component{
          return (
             <ListItem>
 
+            <Icon
+              name='delete'
+              onPress={this.deleteGoal.bind(this, x._id)}
+              />
                 <Text>Daily Goal: {x.activityCategory} for {x.activityGoal} hrs</Text>
 
               <View  style={{flex: 1, flexDirection:'row', justifyContent:'flex-end', alignItems: 'flex-end', alignSelf: 'flex-end'}} >
@@ -94,10 +98,7 @@ class Goals extends Component{
                 onPress={this.editGoal.bind(this, x)}
                 />
 
-                <Icon
-                  name='delete'
-                  onPress={this.deleteGoal.bind(this, x._id)}
-                  />
+
                   <Radio selected={true} />
               </View>
 
@@ -207,7 +208,7 @@ class Goals extends Component{
 
                                     <Text style={styles.value, {textAlign: 'center'}} numberOfLines={1}>{this.state.value}</Text>
                               </View>
-                              
+
                               <Button
                                 large
                                 backgroundColor={'#20C48A'}
