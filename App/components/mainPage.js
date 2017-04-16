@@ -112,12 +112,12 @@ class MainPage extends Component {
     // console.log('LAT currentPosition2', this.state.currentPosition.latitude )
     // console.log('LONG currentPosition2', this.state.currentPosition.longitude )
     return(
-      <View style={{flex: 2}}>
+      <View style={{flex: 1}}>
       {this.state.currentPosition.latitude !== 1 && this.state.currentPosition.longitude !== 1 ? (
 
       <MapView
        resizeMode = "stretch"
-        style={{flex: 1, height: null, width: null, alignItems: 'center'}}
+        style={{flex: 1, height: null, width: null}}
         initialRegion={{
           latitude: this.state.currentPosition.latitude,
           longitude: this.state.currentPosition.longitude,
@@ -133,25 +133,24 @@ class MainPage extends Component {
          }}
          title='Title'
       />
-
-      <View style={{flex: 0,  justifyContent: 'center'}}>
+      <View style={{flex: 0, alignItems: 'center'}}>
         <TouchableOpacity onPress={this.category.bind(this)}>
               <Text
-              style={{borderColor: 'white', borderWidth: 1,borderColor: 'transparent', backgroundColor: '#00A8BE', width: 275, padding: 15, color: 'white', textAlign: 'center', fontSize: 20}}
+              style={{borderColor: 'white', borderWidth: 1,borderColor: 'transparent', backgroundColor: '#00A8BE', width: 275,
+              padding: 15, color: 'white', textAlign: 'center', fontSize: 20, marginTop: 100}}
               placeholder= 'Select a category'
               >Find things to do... {this.state.lastPosition}</Text>
         </TouchableOpacity >
-
-      {this.props.profile.userObject !== null ? (<View style={{flex: 0, alignItems: 'center', justifyContent: 'center'}}>
-
-      <Text style={{fontSize: 12, backgroundColor: 'transparent', fontWeight: '500' }}>Add Location</Text>
-
+      {this.props.profile.userObject !== null ? (<View style={{flex: 0, justifyContent: 'flex-end'}}>
 
           <Icon
             raised
             name='touch-app'
             color='#FD4F0D'
             onPress={() => this.createPin()} />
+
+      <Text style={{fontSize: 12, backgroundColor: 'transparent', fontWeight: '500' , marginTop: 0}}>Add Location</Text>
+
 
       </View>) : null }
 
