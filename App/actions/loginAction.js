@@ -7,47 +7,38 @@ import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 const facebookParams = 'id,name,email,picture.width(100).height(100), gender, age_range, about';
 
-
-export function getMyActivitiesInfor(userID, activity) {
-  console.log("ACTIVITY", activity)
-  console.log("USERID", userID)
+export function getGraphData(userID, myActivity) {
+  console.log('GET INSIDE ACTION GET GRAPH DATA', userID, myActivity)
     return dispatch => {
         dispatch(attempt());
-        console.log("Before Fetch")
-          fetch('http://localhost:8080/getMyActivitiesInfo', {
+
+          fetch('http://localhost:8080/getSortandGroupActivity', {
               method: 'POST',
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
-                userID: userID
+                userID: userID,
+                myActivity: myActivity
               })
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("made it to the promised land")
+
                 var userObject = Object.assign({}, responseJson);
-                // userObject["picture.width"] = result.picture.data.width;
-                // userObject["picture.height"] = result.picture.data.height;
-
-                console.log("populate activities information: ", userObject)
-
-                dispatch(selectActivity(userObject, activity));
+                console.log('GET INSIDE ACTION IN RESPONSE GET GRAPH DATA',userObject )
+                dispatch(addUser(userObject));
             })
             .catch((err) => {
               console.log('error: ', err)
             });
 
-}
-}
+        }
+      // ).catch((err) => {
+      //       dispatch(errors(err));
+      // });
+    };
 
-function selectActivity(activityOwner, activity) {
-  return {
-    type: "SELECT_ACTIVITY",
-    selectedActivity: activity,
-    selectedActivityOwner: activityOwner
-  }
-}
 
 function getInfo() {
     return new Promise((resolve, reject) => {
@@ -178,6 +169,32 @@ export function login() {
         }).catch((err) => {
             dispatch(errors(err));
       });
+    };
+}
+
+export function editProfile(userID, userObject) {
+    return dispatch => {
+        dispatch(attempt());
+
+          fetch('http://localhost:8080/editUser', {
+              method: 'POST',
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                userID: userID,
+                userObject: userObject
+              })
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                var userObject = Object.assign({}, responseJson);
+                dispatch(addUser(userObject));
+            })
+            .catch((err) => {
+              console.log('error: ', err)
+            });
+
     };
 }
 

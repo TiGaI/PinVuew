@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   AppRegistry, ScrollView, StyleSheet, View, TextInput, TouchableOpacity, NavigatorIOS,
-  ListView, Alert, Image, Animated, Dimensions } from 'react-native';
+  ListView, Alert, Image, Animated } from 'react-native';
 import { Container, Content, Left, Body, Right, Text, ListItem, Thumbnail, Card, CardItem, Tabs, Tab } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
@@ -15,13 +15,10 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/initialAction';
 import * as loginAction from '../actions/loginAction';
 
-import DailyMap from './dailyMap';
-
-
 
 import { connect } from 'react-redux';
 
-var width = Dimensions.get('window').width;
+
 
 var image5 = {uri: 'https://www.thisiscolossal.com/wp-content/uploads/2016/03/finger-4.jpg'}
 var image4 = {uri: 'https://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg'}
@@ -42,6 +39,8 @@ class ProfilePage extends Component{
   constructor(props){
     super(props)
     this.props.actions.getAllUserActivities(this.props.profile.userObject._id)
+    this.props.loginActions.getGraphData(this.props.profile.userObject._id, this.props.profile.userObject.myActivity)
+    console.log('PROFILE PAGE PROPSSSSS', this.props)
   }
   viewStyle() {
     return {
@@ -54,11 +53,6 @@ class ProfilePage extends Component{
     const {userObject} = this.props.profile;
     const {activitiesPageState, actions} =this.props;
     actions.sendFriendRequest(userObject._id , activitiesPageState.selectedActivityOwner)
-  }
-  map(){
-    this.props.navigator.push({
-      component: DailyMap
-    })
   }
   render(){
     const {userObject} = this.props.profile;
@@ -267,7 +261,8 @@ class ProfilePage extends Component{
       x = true;
       var goalFinished = totalHoursArray;
       // this.props.actions.passGoalObject(goalFinished);
-      dataSourceMain = ds.cloneWithRows(totalHoursArray[0])
+      console.log('SORRREEETTTEEDD', this.props.profile.userObject.sortedPing)
+      dataSourceMain = ds.cloneWithRowsAndSections(this.props.profile.userObject.sortedPing)
 
     }
 
@@ -283,14 +278,13 @@ class ProfilePage extends Component{
               loop={false}
               showsPagination={false}
               index={1}>
-
               <View style={this.viewStyle()}>
                 <Container>
                   <Content>
                   <View style={{flex: 1, backgroundColor: 'grey'}}>
-                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'white', padding: 10}}>
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#00A8BE', padding: 10}}>
                       <View style={{flex: 1, backgroundColor:'white', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                      <Thumbnail style={{ height: 120, width: 120, borderRadius: 60}} source={{uri: userObject.profileImg }} />
+                      <Thumbnail style={{ height: 140, width: 140, borderRadius: 70}} source={{uri: userObject.profileImg }} />
                       <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 18, marginTop: 5}}>{userObject.firstName + " " + userObject.lastName}</Text>
                       </View>
 
@@ -319,94 +313,99 @@ class ProfilePage extends Component{
                       </View>
                       </View>
                       </View>
-                      <View style={{flex: 1, backgroundColor: 'white', padding: 5, marginTop: 0}}>
+                      <View style={{flex: 1, backgroundColor: '#00A8BE', padding: 10, marginTop: 0}}>
                       <ListView
                           dataSource={dataSourceMain}
-                          renderRow={(rowData) => <View style={{backgroundColor: '#0C3048', marginBottom: 10, padding: 0, backgroundColor: '#0C3048'}}>
+                          renderRow={(rowData) => <View style={{backgroundColor: '#0C3048', marginBottom: 5, padding: 0, backgroundColor: 'grey'}}>
 
 
-
-                                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#0C3048'}}>
-                                  <View style={{flex: 1, backgroundColor: '#20858F', width: width, flexDirection: 'row', padding: 10, justifyContent: 'center', marginTop: 40}}>
-                                  <Icon name='md-podium' style={{color: 'white', fontSize: 21, marginRight: 5}}/>
-                                  <Text style={{flex: 1, color: 'white', fontSize: 18,fontWeight: '600'}}>PINS OVERVIEW</Text>
-                                  </View>
-                                  <View style={{padding: 10}}>
+                            <Tabs locked={true}>
+                                <Tab heading="Stats" tabBgColor='#00A8BE'>
+                                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 5, backgroundColor: 'lightgrey'}}>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Entertainment.</Text>
+                                        <Text style={styled.label}>Entertainment.</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Entertainment, {width: (rowData.Entertainment === 0) ? (0) : (rowData.Entertainment.Entertainment)*20}]} />
+                                            <Animated.View style={[styled.bar, styled.Entertainment, {width: (rowData.Entertainment === 0) ? (5) : (rowData.Entertainment.Entertainment)*20}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Entertainment === 0) ? (0) : (rowData.Entertainment.Entertainment)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Exercise</Text>
+                                        <Text style={styled.label}>Exercise</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Exercise, {width: (rowData.Exercise === 0) ? (0) : (rowData.Exercise.Exercise)*20}]} />
+                                            <Animated.View style={[styled.bar, styled.Exercise, {width: (rowData.Exercise === 0) ? (5) : (rowData.Exercise.Exercise)*20}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Exercise === 0) ? (0) : (rowData.Exercise.Exercise)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Food</Text>
+                                        <Text style={styled.label}>Food</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Food, {width: (rowData.Food === 0) ? (0) : (rowData.Food.Food)*20}]} />
+                                            <Animated.View style={[styled.bar, styled.Food, {width: (rowData.Food === 0) ? (5) : (rowData.Food.Food)*20}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Food === 0) ? (0) : (rowData.Food.Food)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Hobbies</Text>
+                                        <Text style={styled.label}>Hobbies</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Hobbies, {width: (rowData.Hobbies === 0) ? (0) : (rowData.Hobbies.Hobbies)*20}]} />
+                                            <Animated.View style={[styled.bar, styled.Hobbies, {width: (rowData.Hobbies === 0) ? (5) : (rowData.Hobbies.Hobbies)*20}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Hobbies === 0) ? (0) : (rowData.Hobbies.Hobbies)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Relaxing</Text>
+                                        <Text style={styled.label}>Relaxing</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Relaxing, {width: (rowData.Relaxing === 0) ? (0) : (rowData.Relaxing.Relaxing)*20}]} />
+                                            <Animated.View style={[styled.bar, styled.Relaxing, {width: (rowData.Relaxing === 0) ? (5) : (rowData.Relaxing.Relaxing)*20}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Relaxing === 0) ? (0) : (rowData.Relaxing.Relaxing)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
-                                        <Text style={{color: 'white', fontSize: 15, fontWeight: '500'}}>Studying</Text>
+                                        <Text style={styled.label}>Studying</Text>
                                         <View style={styled.data}>
 
-                                            <Animated.View style={[styled.bar, styled.Studying, {width: (rowData.Studying === 0) ? (0) : (rowData.Studying.Studying*10)}]} />
+                                            <Animated.View style={[styled.bar, styled.Studying, {width: (rowData.Studying === 0) ? (5) : (rowData.Studying.Studying*10)}]} />
 
                                           <Text style={styled.dataNumber}>{(rowData.Studying === 0) ? (0) : (rowData.Studying.Studying)}</Text>
                                         </View>
                                   </View>
-                                  </View>
+
                                   </View>
 
-                                  <View style={{flex: 1, backgroundColor: '#EE4D52', width: width, flexDirection: 'row', padding: 10, justifyContent: 'center', marginTop: 50}}>
-                                  <Icon name='md-ribbon' style={{color: 'white', fontSize: 21, marginRight: 5}}/>
-                                  <Text style={{flex: 1, color: 'white', fontSize: 18,fontWeight: '600'}}>DAILY OVERVIEW</Text>
-                                  </View>
-
-                                  <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 10}}>
-                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pie'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Total Hrs {
+                                  <View style={{flexDirection: 'row', marginTop: 10}}>
+                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pie'>{"\n"}<Text style={{color: 'black', fontSize: 12}}>Total Hrs {
                                       ((rowData.Entertainment === 0) ? (0) : (rowData.Entertainment.Entertainment))+((rowData.Exercise === 0) ? (0) : (rowData.Exercise.Exercise))
                                       +((rowData.Food === 0) ? (0) : (rowData.Food.Food))+((rowData.Hobbies === 0) ? (0) : (rowData.Hobbies.Hobbies))+
                                       ((rowData.Relaxing === 0) ? (0) : (rowData.Relaxing.Relaxing))+((rowData.Studying === 0) ? (0) : (rowData.Studying.Studying))
                                     }</Text></Icon>
-                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pin'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Pins {(rowData.pinCount.pinCountPerDay === 0) ? (0) : (rowData.pinCount.pinCountPerDay)}</Text></Icon>
-                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-calendar'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>{rowData.date}</Text></Icon>
-                                    <Icon  onPress={this.map.bind(this)} style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-map'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Map </Text></Icon>
+                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pin'>{"\n"}<Text style={{color: 'black', fontSize: 12}}>Pins {(rowData.pinCount.pinCountPerDay === 0) ? (0) : (rowData.pinCount.pinCountPerDay)}</Text></Icon>
+                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-calendar'>{"\n"}<Text style={{color: 'black', fontSize: 12}}>Date {rowData.date}</Text></Icon>
                                   </View>
 
+                                </Tab>
+                                <Tab heading="Images" >
+                                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                                <ListView
+                                    dataSource={dataSource1}
+                                    renderRow={(rowData) => <View><Text>{rowData.name}</Text>
+                                    <Image source={rowData.image} resizeMode="stretch" style={{width:300, height:300, marginRight: 5, justifyContent:'flex-end', alignItems:'center'}}>
+                                    </Image>
+                                    </View>
+                                  }
+                                  horizontal = {true}
+                                  showsHorizontalScrollIndicator = {true}
+                                  />
 
-
+                                  </View>
+                                </Tab>
+                            </Tabs>
                             </View>
 
                           }
@@ -470,7 +469,7 @@ const styled = StyleSheet.create({
     marginBottom: 5,
     paddingHorizontal: 10
   },
-  test: {
+  label: {
     color: 'white',
     flex: 1,
     fontSize: 12,
@@ -482,10 +481,8 @@ const styled = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginTop: 5,
-    width: width*0.9,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    height: 6
+    width: 330,
+    backgroundColor: 'white'
   },
   dataNumber: {
     color: 'black',
@@ -494,7 +491,7 @@ const styled = StyleSheet.create({
   // Bar
   bar: {
     alignSelf: 'flex-start',
-    borderRadius: 8,
+    borderRadius: 0,
     height: 20,
     marginRight: 5
   },
@@ -560,7 +557,8 @@ function mapStateToProps(state) {
     return {
         login: state.get('login'),
         profile: state.get('profile'),
-        activitiesPageState: state.get('activityPageState')
+        activitiesPageState: state.get('activityPageState'),
+        goal: state.get('goal')
     };
 }
 

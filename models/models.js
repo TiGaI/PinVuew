@@ -31,7 +31,12 @@ var userSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
     default: false
-  }
+  },
+  sortedPing: {
+    type: Object,
+    default: {}
+  },
+  myActivity: [String]
 },
 { timestamps: true }
 );
@@ -59,10 +64,6 @@ var activitySchema = new mongoose.Schema({
   },
   activityCategory:{
     type: String,
-    required: true
-  },
-  activityCapacity: {
-    type: Number,
     required: true
   },
   activityDuration: {
@@ -94,6 +95,10 @@ var goalsSchema = new mongoose.Schema({
   goalTimeFrame: {
     type: Number,
     required: true
+  },
+  currentProgress: {
+    type: Number,
+    default: 0
   }
   },
   { timestamps: true }
