@@ -31,11 +31,12 @@ export function getGraphData(userID, myActivity) {
               console.log('error: ', err)
             });
 
-        }).catch((err) => {
-            dispatch(errors(err));
-      });
+          }
+      //     .catch((err) => {
+      //       dispatch(errors(err));
+      // });
     };
-}
+
 
 function getInfo() {
     return new Promise((resolve, reject) => {
