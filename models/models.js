@@ -31,7 +31,12 @@ var userSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
     default: false
-  }
+  },
+  sortedPing: {
+    type: Object,
+    default: {}
+  },
+  myActivity: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activity'}]
 },
 { timestamps: true }
 );
@@ -59,10 +64,6 @@ var activitySchema = new mongoose.Schema({
   },
   activityCategory:{
     type: String,
-    required: true
-  },
-  activityCapacity: {
-    type: Number,
     required: true
   },
   activityDuration: {

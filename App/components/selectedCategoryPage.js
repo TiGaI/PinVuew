@@ -137,12 +137,12 @@ class SelectedCategory extends Component {
       }}
       pinColor={(marker.activityCreator[0] === newVariable && marker.activityCreator[0] !== null  && newVariable !== null  ) ? 'green' : 'red'}
       >
-        <MapView.Callout style={{width:120, height:25}}>
+        <MapView.Callout style={{width:120, height:35}}>
           <TouchableOpacity
               onPress={this.detailedPin.bind(this, marker)}>
             <View style={{justifyContent: 'center'}}>
               <Text style={{fontSize: 15, fontWeight: '500', textAlign: 'left'}}>{marker.activityCategory}</Text>
-              <Text>Spots remaining {marker.activityCapacity}</Text>
+              <Text style={{fontSize: 12, fontWeight: '400', textAlign: 'left'}}>{marker.activityTitle}</Text>
             </View>
           </TouchableOpacity>
         </MapView.Callout>

@@ -4,6 +4,7 @@ import { AppRegistry, ScrollView, StyleSheet, Text, View,
 import { Item, Input, Tab, Tabs,Spinner, List, ListItem, Left, Body } from 'native-base';
 import Swiper from 'react-native-swiper';
 import randomcolor from 'randomcolor';
+import Icons from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -162,32 +163,27 @@ class MainPage extends Component {
     )
   }
 }
-var sports = [{name: 'Baseball',
-              iconName: 'ios-baseball'
+var sports = [{name: 'Entertainment',
+              iconName: 'ios-beer'
               },
-              {name: 'Basketball',
-             iconName: 'md-basketball'
-              },
-               {name: 'Beach Volleyball',
-             iconName: 'ios-basketball'
-              },
-               {name: 'Football',
-             iconName: 'ios-american-football'
-              },
-               {name: 'Hiking',
-             iconName: 'ios-walk'
-              },
-               {name: 'Running',
+              {name: 'Exercise',
              iconName: 'md-walk'
               },
-               {name: 'Soccer',
-               iconName: 'ios-football'
+               {name: 'Food',
+             iconName: 'md-pizza'
               },
-               {name: 'Tennis',
-             iconName: 'ios-tennisball'
-
+               {name: 'Hobbies',
+             iconName: 'ios-american-football'
               },
-
+               {name: 'Relaxing',
+             iconName: 'ios-desktop'
+              },
+               {name: 'Studying',
+             iconName: 'ios-book'
+            },
+            {name: 'Relaxing',
+            iconName: 'ios-desktop'
+            },
            ];
 
 
@@ -227,7 +223,7 @@ class Categories extends Component {
                 <ListItem>
                   <TouchableOpacity onPress={this.selectCategory.bind(this, rowData)}>
                     <Left>
-                    <Icon style={{fontSize: 30, color: 'grey', marginRight: 10}} name={rowData.iconName}/>
+                    <Icons style={{fontSize: 30, color: 'grey', marginRight: 10}} name={rowData.iconName}/>
                     <Text style={{marginTop: 8}}>{rowData.name}</Text>
                     </Left>
 
@@ -244,7 +240,6 @@ class Categories extends Component {
 
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -21,7 +21,6 @@ export function settingGoal(state = {
               notifications: action.notifications
           });
 
-
     default:
         return state;
     }

@@ -7,46 +7,34 @@ import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 const facebookParams = 'id,name,email,picture.width(100).height(100), gender, age_range, about';
 
-
-export function getMyActivitiesInfor(userID, activity) {
-  console.log("ACTIVITY", activity)
-  console.log("USERID", userID)
+export function getGraphData(userID, myActivity) {
     return dispatch => {
         dispatch(attempt());
-        console.log("Before Fetch")
-          fetch('http://localhost:8080/getMyActivitiesInfo', {
+
+          fetch('http://localhost:8080/getSortandGroupActivity', {
               method: 'POST',
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
-                userID: userID
+                userID: userID,
+                myActivity: myActivity
               })
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("made it to the promised land")
+
                 var userObject = Object.assign({}, responseJson);
-                // userObject["picture.width"] = result.picture.data.width;
-                // userObject["picture.height"] = result.picture.data.height;
-
-                console.log("populate activities information: ", userObject)
-
-                dispatch(selectActivity(userObject, activity));
+                dispatch(addUser(userObject));
             })
             .catch((err) => {
               console.log('error: ', err)
             });
 
-}
-}
-
-function selectActivity(activityOwner, activity) {
-  return {
-    type: "SELECT_ACTIVITY",
-    selectedActivity: activity,
-    selectedActivityOwner: activityOwner
-  }
+        }).catch((err) => {
+            dispatch(errors(err));
+      });
+    };
 }
 
 function getInfo() {
