@@ -55,6 +55,7 @@ class MainPage extends Component {
       },
 
     }
+    this.props.loginActions.getGraphData(this.props.profile.userObject._id, this.props.profile.userObject.myActivity)
   }
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(

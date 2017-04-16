@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -85,14 +85,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>I need this so that we can see where the user is at then help the user track where they being.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-  <string>I need this so users can upload photos</string>
-	<key>NSMicrophoneUsageDescription</key>
-  <string>I need this so that users can upload videos</string>
 	<key>NSCameraUsageDescription</key>
 	<string>I need this so that users can upload videos</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need this so that we can see where the user is at then help the user track where they being.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>I need this so that users can upload videos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>I need this so users can upload photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

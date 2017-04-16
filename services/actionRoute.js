@@ -12,7 +12,6 @@ router.post('/createGoal', function(req, res){
     Goal.findOne({$and: [
           {'user': req.body.user},
           {'activityCategory': req.body.activityCategory},
-          {'activityGoal': req.body.activityGoal},
           {'goalTimeFrame': req.body.goalTimeFrame},
           ]})
      .exec( function(err, goal) {
@@ -39,7 +38,7 @@ router.post('/createGoal', function(req, res){
           })
 
       }else{
-        console.log('Stop creating the same goal and go do it!')
+        console.log('Stop creating the same daily goal and go do it!')
         res.send(null)
       }
     })
@@ -99,7 +98,7 @@ router.post('/deleteGoal', function(req, res){
 
 router.post('/checkProgess', function(req, res){
 
-  
+
 
 })
 
