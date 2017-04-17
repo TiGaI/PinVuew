@@ -16,7 +16,7 @@ export default class ProfilePageIndex extends Component {
               title: 'ProfilePage',
               showTabBar: true
             }}
-            navigationBarHidden={true}>
+            navigationBarHidden={false}>
           </NavigatorIOS>
         </View>
       )

@@ -147,7 +147,7 @@ class ProfilePage extends Component{
                           renderRow={(rowData) => <View style={{backgroundColor: '#07263B', marginBottom: 5, padding: 0, backgroundColor: 'grey'}}>
                                     {console.log('ROOOWWWW', rowData)}
                                     <View style={{backgroundColor: '#28B19D', width: width, padding: 7}}>
-                                      <Text style={{fontSize: 20, fontWeight: '600', color: 'white'}}>STATS OVERVIEW</Text>
+                                      <Text style={{fontSize: 16, fontWeight: '600', color: 'white'}}>STATS OVERVIEW</Text>
                                     </View>
                                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 15, backgroundColor: '#07263B'}}>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
@@ -195,7 +195,7 @@ class ProfilePage extends Component{
                                           <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Relaxing) ? (0) : (rowData.Relaxing.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
-                                  <View style={{flex: 1, marginTop: 5, marginBottom: 10}}>
+                                  <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
                                         <Text style={{color: 'white', fontSize: 15}}>Studying</Text>
                                         <View style={styled.data}>
 
@@ -207,10 +207,10 @@ class ProfilePage extends Component{
 
                                   </View>
                                   <View style={{backgroundColor: '#FC4F48', width: width, padding: 7}}>
-                                    <Text style={{fontSize: 20, fontWeight: '600', color: 'white'}}>DAILY OVERVIEW</Text>
+                                    <Text style={{fontSize: 16, fontWeight: '600', color: 'white'}}>DAILY OVERVIEW</Text>
                                   </View>
 
-                                  <View style={{flexDirection: 'row',backgroundColor: '#07263B', padding: 10}}>
+                                  <View style={{flexDirection: 'row',backgroundColor: '#07263B', padding: 7}}>
                                     <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pie'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Hours {rowData.totalHoursPerDay}</Text></Icon>
                                     <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pin'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Pins {rowData.totalPinsPerDay}</Text></Icon>
                                     <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-calendar'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>{rowData.date}</Text></Icon>

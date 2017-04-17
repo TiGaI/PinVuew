@@ -143,14 +143,6 @@ render() {
           longitudeDelta: this.state.currentPosition.longitudeDelta,
         }}
       >
-      <MapView.Marker
-        coordinate={{latitude: this.state.currentPosition.latitude,
-        longitude: this.state.currentPosition.longitude,
-        latitudeDelta: this.state.currentPosition.latitudeDelta,
-        longitudeDelta: this.state.currentPosition.longitudeDelta,
-        }}
-        title='TESTING'
-     />
       {this.mapData()}
 
       </MapView>
