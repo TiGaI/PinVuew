@@ -74,8 +74,14 @@ class ProfilePage extends Component{
 
   render(){
     // const {userObject} = this.props.profile;
+    var totalHours = 0;
+    var totalPins = 0;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
+    for(var key in this.props.profile.userObject.sortedPing){
+      totalHours = totalHours + this.props.profile.userObject.sortedPing[key].totalHoursPerDay;
+      totalPins = totalPins + this.props.profile.userObject.sortedPing[key].totalPinsPerDay;
+    }
+    console.log(totalHours, totalPins)
     // var dataSourceMain = '';
     //
     var x = 1;
@@ -107,7 +113,7 @@ class ProfilePage extends Component{
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#00A8BE', padding: 0}}>
                       <View style={{flex: 1, backgroundColor:'white', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                       <Thumbnail style={{ height: 100, width: 100, borderRadius: 50}} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Two_dancers.jpg'}} />
-                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 18, marginTop: 5}}>kjhjhbhjgvjcyfc</Text>
+                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 18, marginTop: 5}}>{this.props.profile.userObject.firstName + ' ' + this.props.profile.userObject.lastName }</Text>
                       </View>
 
                       <View style={{flex: 1, backgroundColor:'white', justifyContent: 'center', alignItems: 'center', padding: 10}}>
@@ -123,14 +129,14 @@ class ProfilePage extends Component{
                       <Icon style={{flex: 1,fontSize: 35, color: '#FF514E', textAlign: 'center'}} name='md-pin'></Icon>
                       <View style={{flex: 2}}>
                       <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 12, marginTop: 5}}>Pins Created</Text>
-                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 15, marginTop: 0}}>123</Text>
+                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 15, marginTop: 0}}>{totalHours}</Text>
                       </View>
                       </View>
                       <View style={{flex: 1, flexDirection: 'row'}}>
                       <Icon style={{flex: 1,fontSize: 35, color: '#41A36A', textAlign: 'center'}} name='ios-timer'></Icon>
                       <View style={{flex: 2}}>
                       <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 12, marginTop: 5}}>Pinned Hours</Text>
-                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 15, marginTop: 0}}>12</Text>
+                      <Text style={{textAlign: 'left', fontWeight: '400', fontSize: 15, marginTop: 0}}>{totalPins}</Text>
                       </View>
                       </View>
                       </View>
@@ -140,17 +146,17 @@ class ProfilePage extends Component{
                           dataSource={dataSourceMain}
                           renderRow={(rowData) => <View style={{backgroundColor: '#07263B', marginBottom: 5, padding: 0, backgroundColor: 'grey'}}>
                                     {console.log('ROOOWWWW', rowData)}
-                                    <View style={{backgroundColor: '#28B19D', width: width, padding: 10}}>
-                                      <Text style={{fontSize: 20, fontWeight: '500', color: 'white'}}>STATS OVERVIEW</Text>
+                                    <View style={{backgroundColor: '#28B19D', width: width, padding: 7}}>
+                                      <Text style={{fontSize: 20, fontWeight: '600', color: 'white'}}>STATS OVERVIEW</Text>
                                     </View>
-                                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 5, backgroundColor: '#07263B'}}>
+                                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 15, backgroundColor: '#07263B'}}>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
                                         <Text style={{color: 'white', fontSize: 15}}>Entertainment.</Text>
                                         <View style={styled.data}>
 
                                             <Animated.View style={[styled.bar, styled.Entertainment, {width: (!rowData.Entertainment) ? (5) : (rowData.Entertainment.totalHoursForThisCategory)*20}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Entertainment) ? (0) : (rowData.Entertainment.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Entertainment) ? (0) : (rowData.Entertainment.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
@@ -159,7 +165,7 @@ class ProfilePage extends Component{
 
                                             <Animated.View style={[styled.bar, styled.Exercise, {width: (!rowData.Exercise) ? (5) : (rowData.Exercise.totalHoursForThisCategory)*20}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Exercise) ? (0) : (rowData.Exercise.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Exercise) ? (0) : (rowData.Exercise.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
@@ -168,7 +174,7 @@ class ProfilePage extends Component{
 
                                             <Animated.View style={[styled.bar, styled.Food, {width: (!rowData.Food) ? (5) : (rowData.Food.totalHoursForThisCategory)*20}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Food) ? (0) : (rowData.Food.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Food) ? (0) : (rowData.Food.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
@@ -177,7 +183,7 @@ class ProfilePage extends Component{
 
                                             <Animated.View style={[styled.bar, styled.Hobbies, {width: (!rowData.Hobbies) ? (5) : (rowData.Hobbies.totalHoursForThisCategory)*20}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Hobbies) ? (0) : (rowData.Hobbies.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Hobbies) ? (0) : (rowData.Hobbies.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
                                   <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
@@ -186,29 +192,29 @@ class ProfilePage extends Component{
 
                                             <Animated.View style={[styled.bar, styled.Relaxing, {width: (!rowData.Relaxing) ? (5) : (rowData.Relaxing.totalHoursForThisCategory)*20}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Relaxing) ? (0) : (rowData.Relaxing.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Relaxing) ? (0) : (rowData.Relaxing.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
-                                  <View style={{flex: 1, marginTop: 5, marginBottom: 5}}>
+                                  <View style={{flex: 1, marginTop: 5, marginBottom: 10}}>
                                         <Text style={{color: 'white', fontSize: 15}}>Studying</Text>
                                         <View style={styled.data}>
 
                                             <Animated.View style={[styled.bar, styled.Studying, {width: (!rowData.Studying) ? (5) : (rowData.Studying.totalHoursForThisCategory*10)}]} />
 
-                                          <Text style={styled.dataNumber}>{(!rowData.Studying) ? (0) : (rowData.Studying.totalHoursForThisCategory)}</Text>
+                                          <Text style={{color: 'black',fontSize: 15, backgroundColor: 'transparent'}}>{(!rowData.Studying) ? (0) : (rowData.Studying.totalHoursForThisCategory)}</Text>
                                         </View>
                                   </View>
 
                                   </View>
-                                  <View style={{backgroundColor: '#FC4F48', width: width, padding: 10}}>
-                                    <Text style={{fontSize: 20, fontWeight: '500', color: 'white'}}>DAILY OVERVIEW</Text>
+                                  <View style={{backgroundColor: '#FC4F48', width: width, padding: 7}}>
+                                    <Text style={{fontSize: 20, fontWeight: '600', color: 'white'}}>DAILY OVERVIEW</Text>
                                   </View>
 
                                   <View style={{flexDirection: 'row',backgroundColor: '#07263B', padding: 10}}>
                                     <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pie'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Hours {rowData.totalHoursPerDay}</Text></Icon>
                                     <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-pin'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Pins {rowData.totalPinsPerDay}</Text></Icon>
-                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-calendar'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Date {rowData.date}</Text></Icon>
-                                    <Icon onPress={this.dailyMap.bind(this, rowData)} style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-map'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Map</Text></Icon>
+                                    <Icon style={{flex: 1,fontSize: 30, color: '#FF514E', textAlign: 'center'}} name='md-calendar'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>{rowData.date}</Text></Icon>
+                                    <Icon onPress={this.dailyMap.bind(this, rowData)} style={{flex: 1,fontSize: 30, color: '#28B19D', textAlign: 'center'}} name='md-map'>{"\n"}<Text style={{color: 'white', fontSize: 12}}>Map</Text></Icon>
                                   </View>
 
 
@@ -286,19 +292,21 @@ const styled = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: 5,
+    alignItems: 'center',
     width: width*0.90,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    height: 15,
   },
   dataNumber: {
     color: 'black',
-    fontSize: 7
+    fontSize: 5,
+    backgroundColor: 'transparent'
   },
   // Bar
   bar: {
     alignSelf: 'flex-start',
     borderRadius: 0,
-    height: 20,
+    height: 15,
     marginRight: 5
 
   },
