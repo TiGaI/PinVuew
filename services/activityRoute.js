@@ -80,9 +80,11 @@ router.post('/getSortandGroupActivity', function(req, res){
                 newObject[key][key2] = {'activities': newObject[key][key2],
                                         'totalHoursForThisCategory': tempObject.activityDuration}
               });
+              
                 newObject[key] = Object.assign(newObject[key],
                   {'totalHoursPerDay': totalHoursPerDay},
-                  {'totalPinsPerDay': totalPinsPerDay})
+                  {'totalPinsPerDay': totalPinsPerDay},
+                  {'date': key})
                 totalHoursPerDay = 0;
                 totalPinsPerDay = 0;
           })

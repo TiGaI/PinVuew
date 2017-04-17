@@ -3,8 +3,10 @@ import React, { Component, PropTypes } from 'react';
 import styles from './styles';
 import { connect } from 'react-redux';
 import IndexPage from './index';
-import ProfilePage from './myProfilePage';
+import ProfilePageIndex from './profilePageInitial';
 import Goals from './goals';
+
+
 
 class ApplicationTabs extends Component {
 	constructor() {
@@ -54,7 +56,7 @@ class ApplicationTabs extends Component {
 			    renderSelectedIcon={() => <Icon color={'#6296f9'} name='person' size={30} />}
 			    onPress={() => this.changeTab('profile')}>
 
-								<ProfilePage />
+								<ProfilePageIndex />
 			  </Tab>
 			</Tabs>
 		);
